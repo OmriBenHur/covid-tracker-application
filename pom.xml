@@ -11,7 +11,7 @@
 	<groupId>com.application</groupId>
 	<artifactId>covid-tracker-application</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging
+	<packaging>war</packaging>
 	<name>covid-tracker-application</name>
 	<description>Corona Virus (Covid 19) cases tracker application  </description>
 	<properties>
