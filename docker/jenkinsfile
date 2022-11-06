@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('clean workspace') {
+            steps{
+                cleanWs()
+            }
+        }
+        stage('git clone') {
+            steps {
+                checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/OmriBenHur/covid-tracker-application.git']]]
+            }
+        }
+        stage('sonarqube test') {
+            steps {
+                withSonarQubeEnv(credentialsId: 'sonarqube-token',installationName: 'sonar') {
+                    sh './mvnw clean verify sonar:sonar'
+                }
+            }
+        }
+        stage('maven build') {
+            steps {
+                withMaven(maven: 'maven') {
+                    sh './mvnw clean package'
+                }
+            }
+        }
+        stage('nexus upload') {
+            steps{
+                nexusArtifactUploader artifacts: [[artifactId: 'covid-tracker-application', classifier: '', file: 'target/covid-tracker-application-0.0.1-SNAPSHOT.war', type: 'war']], credentialsId: 'nexus-id', groupId: 'com.application', nexusUrl: 'docker-nexus-1:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '0.0.1-SNAPSHOT'            }
+        }
+    }
+}

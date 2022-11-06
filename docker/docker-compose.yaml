@@ -1,0 +1,25 @@
+version: '3'
+services:
+
+  jenkins:
+    image: jenkins/jenkins:2.361.3-jdk11
+    ports:
+      - "8080:8080"
+    hostname: "jenkins"
+    restart: always
+
+  sonarqube:
+    image: sonarqube:latest
+    ports:
+      - "9000:9000"
+    hostname: "sonarqube"
+    environment:
+      SONAR_ES_BOOTSTRAP_CHECKS_DISABLE : true
+    restart: always
+
+  nexus:
+    image: sonatype/nexus3
+    ports:
+      - "8081:8081"
+    hostname: "nexus"
+    restart: always
