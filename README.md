@@ -69,18 +69,18 @@ URL: https://www.udemy.com/course/build-real-world-java-projects-using-spring-js
 
 
 
-iii. CI jenkins pipline with sonarqube, maven and nexus ducumentation:
+# CI jenkins pipline with sonarqube, maven and nexus ducumentation:
 
 ## 1. docker compose up to run all three containers: Jenkins, sonarqube server and nexus
 
 
 
 
-# 1. jenkins runs on port 8080
+#### 1. jenkins runs on port 8080
 
-# 2. sonarqube runs on port 9000
+#### 2. sonarqube runs on port 9000
 
-# 3. nexus runs on port 8081
+#### 3. nexus runs on port 8081
 
 
 ## 2. open jenkins on http://localhost:8080
